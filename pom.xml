@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <version>4.87</version>
+    <version>5.3</version>
     <relativePath />
   </parent>
 
@@ -45,14 +45,13 @@
     <revision>4</revision>
     <changelist>999999-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
-    <!-- update the jenkins-bom version when updating -->
-    <jenkins.version>2.426.3</jenkins.version>
     <spotless.check.skip>false</spotless.check.skip>
     <spotbugs.effort>Max</spotbugs.effort>
     <configuration-as-code.version>1836.vccda_4a_122a_a_e</configuration-as-code.version>
     <hpi.compatibleSinceVersion>4.383</hpi.compatibleSinceVersion>
     <!-- latest 5.x as 6 uses java 17 -->
-    <pac4jVersion>5.7.7</pac4jVersion>
+    <pac4jVersion>6.1.0</pac4jVersion>
+    <springVersion>6.1.14</springVersion>
   </properties>
 
   <dependencyManagement>
@@ -85,6 +84,27 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.18.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.18.1</version>
+    </dependency>
+    <!--*********** These dependencies need to be managed properly-->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.18.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>2.18.1</version>
+    </dependency>
+    <dependency>
       <groupId>io.burt</groupId>
       <artifactId>jmespath-core</artifactId>
       <version>0.6.0</version>
@@ -105,7 +125,7 @@
     <dependency>
       <groupId>org.pac4j</groupId>
       <!-- replace with pac4j-jakartaee when we use a Jenkins version with jakartaee -->
-      <artifactId>pac4j-javaee</artifactId>
+      <artifactId>pac4j-jakartaee</artifactId>
       <version>${pac4jVersion}</version>
       <exclusions>
         <exclusion>
@@ -124,6 +144,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <!--***********-->
     <dependency>
       <groupId>org.pac4j</groupId>
       <artifactId>pac4j-oidc</artifactId>
@@ -140,6 +161,16 @@
           <artifactId>guava</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${springVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jcl</artifactId>
+      <version>${springVersion}</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
